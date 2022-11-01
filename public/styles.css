@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     background-color: white;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    font-family: Poppins;
+    font-weight: 300;
 }
 
 .header{
@@ -32,4 +36,92 @@
 
 .header a:hover{
     color: crimson;
+}
+
+.leftOpts{
+    width: 275px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.home_container{
+    padding: 15px;
+}
+
+.box{
+    padding:15px;
+    border: 1px solid black;
+    border-radius: 15px;
+}
+
+.imgBox{
+    height:250px;
+    width:250px;
+    border-radius: 10px;
+    object-fit: cover;
+    overflow: hidden;
+    margin-right: 25px;
+}
+
+.imgBox img{
+    height: 250px;
+    width: 250px;
+    object-fit: cover;
+}
+
+.box{
+    display: flex; 
+    margin-bottom: 15px;  
+}
+
+.box .content{
+    padding: 15px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------  Login  ----------------------- */
+input, button{
+    border:1px solid black;
+    outline:  none;
+    padding: 5px 8px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+input{
+    width: 250px;
+}
+
+button{
+    color: white;
+    width: 250px;
+    background-color: black;
+}
+
+.login_container, .signup_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login_container form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 25px;
+    border-radius: 15px;
+    border: 1px solid black;
 }

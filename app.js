@@ -5,8 +5,13 @@ const app = express();
 const port = 3000;
 
 // Models
-// const LoginUser = require('./models/Login');
 const User = require('./models/User');
+
+// Data to show
+const Data = require('./data/Data.js');
+
+// Login or not 
+let isLoggedin = false;
 
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({extended:true}));
@@ -15,6 +20,16 @@ app.use(express.static('public'));
 mongoose.connect("mongodb+srv://Umang:umangrathod@cluster0.82xeogi.mongodb.net/ORPS", {useNewUrlParser :true});
 
 app.get('/',(req,res)=>{
+    if(isLoggedin){
+        res.render('home.ejs', {data:Data, length: 6});
+    }
+    else{
+        res.render('LoggedinHome.ejs', {data:Data, length: 6});
+    }
+    
+});
+
+app.get('/loggedIn',(req,res)=>{
     res.render('home.ejs');
 });
 
@@ -26,16 +41,19 @@ app.get('/signup', (req,res)=>{
     res.sendFile(__dirname + "/static/signup.html");
 });
 
-app.get('/login_user', (req, res)=>{
+app.post('/login_user', (req, res)=>{
     const data = {
-        password:String(req.body.password),
-        email: String(req.body.email),
+        email1:req.body.email,
+        password1: req.body.password,
     }
-    User.findOne({email:data.email}, (err, result)=>{
+    console.log(data);
+    User.findOne({email:data.email1}, (err, result)=>{
         if(!err){
-            if(result != null){
-                if(result.password === data.password){
-                    res.render('LoggedinHome.ejs')
+            console.log(result);
+            if(result !== null){
+                if(result.password === data.password1){
+                    isLoggedin = true;
+                    res.redirect('/')
                 }
                 else{
                     res.send("WRONG_PASSWORD");
@@ -60,7 +78,17 @@ app.post('/signup_user', (req, res)=>{
     if(NewUser.save()){
         console.log(NewUser);
     }
-    res.render('LoggedinHome.ejs');
+    isLoggedin = true;
+    res.redirect('/');
+});
+
+app.get('/uploadarticle',(req,res)=>{
+    if (isLoggedin) {
+        res.sendFile(__dirname + "/static/UploadArticle.html");
+    }
+    else{
+        res.sendFile(__dirname + "/static/login.html");
+    }
 });
 
 app.listen(port,()=>{
