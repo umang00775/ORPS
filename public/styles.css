@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 25px;
+}
+
+
+.header a{
+    text-decoration: none;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    color: black;
+    transition: 0.25s;
+}
+
+.header > a{
+    font-size: 22px;
+    color: crimson;
+    font-style: bold;
+}
+
+.header a:hover{
+    color: crimson;
+}
